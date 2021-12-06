@@ -7,14 +7,16 @@ lines = []
 for line in sys.stdin:
     lines.append(line.rstrip('\n'))
 
-def most_frequent(numbers_list: list, idx: int) -> str:
-    counter = Counter(l[idx] for l in numbers_list)
+def most_frequent(numbers_list: list, idx) -> str:
+    counter = Counter()
+
+    for l in numbers_list:
+        counter.update(l[idx])
+
     return "0" if counter["0"]>counter["1"] else "1"
 
 def complement(number: str) -> str:
-    tmp = (2**(len(number))-1)^int(number, base=2)
-    fmt = "{:0%db}" % len(number)
-    return fmt.format(tmp)
+    return "".join("0" if c=="1" else "1" for c in number)
 
 gamma = "".join(most_frequent(lines, k) for k in range(0, len(lines[0])))
 epsilon = complement(gamma)
