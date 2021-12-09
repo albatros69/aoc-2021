@@ -48,7 +48,7 @@ for l in lines:
                 # 1 is included in 0 and 9, but 6
                 trans_table[6] = sorted_s
             elif 4 in trans_table and all(c in s for c in trans_table[4]):
-                # 4 is included in 0 and 6, but 9
+                # 4 is not included in 0 and 6, but 9
                 trans_table[9] = sorted_s
             else:
                 if 6 in trans_table and 9 in trans_table:
