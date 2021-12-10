@@ -13,10 +13,10 @@ def fuel_part1(med: int) -> tuple:
     return (sum(abs(i-med) for i in crabs), med)
 
 with Pool() as pool:
-    print("Part 1:", min(pool.imap_unordered(fuel_part1, range(0, max(crabs)+1))))
+    print("Part 1:", min(pool.imap_unordered(fuel_part1, range(max(crabs)+1))))
 
 def fuel_part2(med: int) -> tuple:
     return (sum(abs(i-med)*(abs(i-med)+1)//2 for i in crabs), med)
 
 with Pool() as pool:
-    print("Part 2:", min(pool.imap_unordered(fuel_part2, range(0, max(crabs)+1))))
+    print("Part 2:", min(pool.imap_unordered(fuel_part2, range(max(crabs)+1))))

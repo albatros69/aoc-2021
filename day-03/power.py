@@ -14,7 +14,7 @@ def most_frequent(numbers_list: list, idx: int) -> str:
 def complement(number: str) -> str:
     return "".join("0" if c=="1" else "1" for c in number)
 
-gamma = "".join(most_frequent(lines, k) for k in range(0, len(lines[0])))
+gamma = "".join(most_frequent(lines, k) for k in range(len(lines[0])))
 epsilon = complement(gamma)
 print("Part 1:", gamma, epsilon, "→", int(gamma, base=2)*int(epsilon, base=2))
 
@@ -22,7 +22,7 @@ tmp_ox = lines
 tmp_co = lines
 ox = ""
 co = ""
-for k in range(0, len(lines[0])):
+for k in range(len(lines[0])):
     if len(tmp_ox)==1:
         ox = tmp_ox[0]
     else:

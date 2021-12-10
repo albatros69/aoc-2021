@@ -11,7 +11,7 @@ fishes = [ int(i) for i in lines[0].split(',') ]
 
 status = Counter(fishes)
 # print("Initial state:", status)
-for day in range(0, 256):
+for day in range(256):
     new_status = Counter()
     for i in status:
         if i==0:
