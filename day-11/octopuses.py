@@ -48,12 +48,10 @@ for step in range(100):
 # print(f"---- Step {step+1} ----"); print_cave();
 print("Part 1:", nb_flashes)
 
-try:
-    while True:
-        step+=1
-        if do_step()==100:
-            raise StopIteration
+while True:
+    step+=1
+    if do_step()==100:
+        break
 
-except StopIteration:
-    # print(f"---- Step {step+1} ----"); print_cave();
-    print("Part 2:", step+1)
+# print(f"---- Step {step+1} ----"); print_cave();
+print("Part 2:", step+1)
