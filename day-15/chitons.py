@@ -46,6 +46,10 @@ for y in range(5*max_y):
         cave[x,y]=cave[x-max_x,y]+1
         if cave[x,y]>9:
             cave[x,y]=1
+# Alternative to compute the bigger cave
+# for y in range(5*max_y):
+#     for x in range(5*max_x):
+#         cave[x,y] = (cave[x%max_x,y%max_y] + x//max_x + y//max_y - 1)%9 + 1
 # print("\n".join(
 #     "".join(str(cave[x,y]) for x in range(5*max_x)) for y in range(5*max_y)
 # ))
