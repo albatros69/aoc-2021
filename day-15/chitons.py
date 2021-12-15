@@ -25,7 +25,7 @@ def search_path(cave):
         if pos == exit_pos:
             break
         else:
-            for v in ((i,j) for (i,j) in ((0,1), (0,-1), (1,0), (-1,0))):
+            for v in ((0,1), (0,-1), (1,0), (-1,0)):
                 new_pos = pos[0]+v[0], pos[1]+v[1]
                 if cave[new_pos]>=0 and new_pos not in already_seen:
                     already_seen.add(new_pos)
