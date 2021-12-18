@@ -3,6 +3,7 @@
 from __future__ import annotations
 import sys
 from typing import Union
+from ast import literal_eval
 from itertools import product
 
 
@@ -145,16 +146,16 @@ class Number():
 result=None
 for l in lines:
     if result:
-        result += Number(eval(l))
+        result += Number(literal_eval(l))
         # print(result)
         result.reduce()
     else:
-        result = Number(eval(l))
+        result = Number(literal_eval(l))
     # print(result)
 
 print("Part 1:", result.magnitude)
 
-results = list(Number(eval(x))+Number(eval(y)) for (x,y) in product(lines, repeat=2) if x!=y)
+results = list(Number(literal_eval(x))+Number(literal_eval(y)) for (x,y) in product(lines, repeat=2) if x!=y)
 for r in results:
     r.reduce()
 print("Part 2:", max(r.magnitude for r in results))
