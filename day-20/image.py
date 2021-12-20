@@ -41,9 +41,11 @@ class Image:
 
 
     def get(self, px):
-        if px not in self.pixels:
+        try:
+            return self.pixels[px]
+        except KeyError:
             self.pixels[px] = self.default
-        return self.pixels[px]
+            return self.default
 
 
     def step(self):
