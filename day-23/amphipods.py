@@ -18,10 +18,6 @@ def is_organized(room: list, k) -> bool:
     return all(a == car for a in room)
 
 
-def is_empty(hallway: list) -> bool:
-    return all(a == '.' for a in hallway)
-
-
 def sign(a: int) -> int:
     if a>0:
         return 1
@@ -51,14 +47,17 @@ def hash_status(rooms, hallway):
     return "".join(('{:.<%d}' % (DEPTH,)).format("".join(r)) for r in rooms) + "".join(hallway)
 
 
-def search_solution(rooms):
-    queue = [(0, rooms, -1, 0, [ '.', ] *11)]
-    already_seen = { hash_status(rooms, [ '.', ] *11): 0 }
+def search_solution(rooms_ini):
+    # print_status(-1, 0, rooms_ini, ['.',]*11)
+    queue = [(0, rooms_ini, -1, 0, [ '.', ] *11)]
+    already_seen = { hash_status(rooms_ini, [ '.', ] *11): 0 }
 
     while queue:
         nrj, rooms, current, dir, hallway = heappop(queue)
 
         if all(is_organized(rooms[k], k) and len(rooms[k])==DEPTH for k in range(4)):
+            # print(len(queue))
+            # print_status(nrj, dir, rooms, hallway)
             return nrj
         else:
             if current >= 0:
@@ -133,7 +132,6 @@ for l in lines[-2:-4:-1]:
     for k in range(4):
         rooms[k].append(l[3+2*k])
 
-# print_status(-1, 0, rooms, ['.',]*11)
 print("Part 1:", search_solution(rooms))
 
 DEPTH=4
@@ -143,5 +141,4 @@ for l in lines[-2:-3:-1]+ ['  #D#B#A#C#', '  #D#C#B#A#' ] + lines[-3:-4:-1]:
     for k in range(4):
         rooms[k].append(l[3+2*k])
 
-# print_status(-1, 0, rooms, ['.',]*11)
 print("Part 2:", search_solution(rooms))
