@@ -26,9 +26,10 @@ def move(h, x,y):
     elif h == 'v':
         return x, (y+1)%height
 
+
 def substep(floor: dict, herd: str) -> dict:
-    new_floor = floor.copy()
-    moves = 0
+    new_floor=floor.copy()
+    moves=0
 
     for c in floor:
         if floor[c] == herd:
@@ -42,10 +43,10 @@ def substep(floor: dict, herd: str) -> dict:
 
 
 def step(floor: dict) -> dict:
-    new_floor = floor.copy()
-    moves = 0
+    new_floor=floor.copy()
+    moves=0
     for h in ('>', 'v'):
-        new_floor, m = substep(new_floor, h)
+        new_floor, m=substep(new_floor, h)
         moves+=m
     return new_floor, moves
 
@@ -53,7 +54,7 @@ def step(floor: dict) -> dict:
 i=0
 while True:
     i=i+1
-    floor, moves = step(floor)
+    floor, moves=step(floor)
     if moves == 0:
         # print(f"After {i} steps:")
         # print_floor(floor)
