@@ -28,8 +28,7 @@ def read_literal(p: list) -> list:
 
 def literal_to_int(l: list) -> int:
     if l:
-        v = l.pop()
-        return v+16*literal_to_int(l)
+        return l[-1]+16*literal_to_int(l[:-1])
     else:
         return 0
 
