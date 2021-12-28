@@ -126,7 +126,8 @@ unknowns = scanners[1:]
 start = time.time()
 while unknowns:
     s = unknowns.pop(0)
-    s.compute_config()
+    if not s.configurations:
+        s.compute_config()
     try:
         for k in known_scanners:
             overlap = k.is_overlap(s)
