@@ -44,6 +44,9 @@ class Scanner:
     def transform(self, matrix) -> None:
         return [ matrix.dot(pt) for pt in self.beacons ]
 
+    def transform_config(self, matrix) -> None:
+        self.configurations = { tuple(matrix.dot(k)): v for (k,v) in self.configurations.items() }
+
     def __repr__(self) -> str:
         return f"Scanner #{self.id}: {self.position}" # + \
             # "\n".join(repr(b) for b in self.beacons)
@@ -91,7 +94,7 @@ for l in lines:
 
 known_beacons = set(scanners[0].as_tuples())
 unknowns = scanners[1:]
-start = time.time()
+start = time.perf_counter()
 while unknowns:
     s = unknowns.pop(0)
     for m in transformations_matrix:
@@ -105,7 +108,7 @@ while unknowns:
             break
     else:
         unknowns.append(s)
-print("Execution time: %.3fs" % (time.time()-start, ))
+print("Execution time: %.3fs" % (time.perf_counter()-start, ))
 
 print("Part 1:", len(known_beacons))
 print("Part 2:", max(norme(s1.position - s2.position) for (s1, s2) in product(scanners, repeat=2)))
@@ -123,7 +126,7 @@ scanners[0].compute_config()
 known_scanners = [scanners[0]]
 known_beacons = set(scanners[0].as_tuples())
 unknowns = scanners[1:]
-start = time.time()
+start = time.perf_counter()
 while unknowns:
     s = unknowns.pop(0)
     if not s.configurations:
@@ -142,7 +145,7 @@ while unknowns:
                     if all(tuple(a)==tuple(pos+b) for (a,b) in zip(ref, tmp)):
                         s.beacons = s.transform(m)
                         s.position = pos+k.position
-                        s.configurations = { tuple(m.dot(k)): v for (k,v) in s.configurations.items() }
+                        s.transform_config(m)
                         # print(s)
                         known_beacons.update(s.as_tuples())
                         known_scanners.append(s)
@@ -153,6 +156,6 @@ while unknowns:
     else:
         unknowns.append(s)
 
-print("Execution time: %.3fs" % (time.time()-start, ))
+print("Execution time: %.3fs" % (time.perf_counter()-start, ))
 print("Part 1 (bis):", len(known_beacons))
 print("Part 2 (bis):", max(norme(s1.position - s2.position) for (s1, s2) in product(scanners, repeat=2)))
